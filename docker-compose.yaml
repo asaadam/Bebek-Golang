@@ -1,0 +1,39 @@
+version: "3.3"
+services:
+  db:
+    image: postgres:13-alpine
+    container_name: bebek_db
+    volumes:
+      - "db_data:$HOME/bebek_db"
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: bebek
+    restart: on-failure
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+  server:
+    container_name: bebek_server
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    restart: on-failure
+    ports: 
+      - "8000:8000"
+    volumes: 
+      - "./image:/image"
+    networks: 
+      - backend
+    depends_on: 
+      - db
+
+volumes:
+  db_data: 
+      
+
+networks:
+  backend:
+    driver: bridge
+      

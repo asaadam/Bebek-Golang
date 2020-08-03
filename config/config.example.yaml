@@ -1,0 +1,11 @@
+server:
+  host: "localhost"
+  port: 8080
+
+database:
+  postgresdb:
+    dbhost: "localhost"
+    dbport: 5432
+    dbname: "bebek"
+    dbuser: "admin"
+    dbpassword: "root"
